@@ -1,6 +1,6 @@
 services:
-  radix.subtheme.command:
-    class: 'Drush\Commands\radix\SubThemeCommands'
+  dorion.subtheme.command:
+    class: 'Drush\Commands\dorion\SubThemeCommands'
     tags:
       -
         name: 'drush.command'

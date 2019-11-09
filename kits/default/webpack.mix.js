@@ -38,11 +38,11 @@ mix.browserSync({
  | SASS
  |--------------------------------------------------------------------------
  */
-mix.sass('src/sass/RADIX_SUBTHEME_MACHINE_NAME.style.scss', 'css');
+mix.sass('sass/DORION_SUBTHEME_MACHINE_NAME.style.scss', 'css');
 
 /*
  |--------------------------------------------------------------------------
  | JS
  |--------------------------------------------------------------------------
  */
-mix.js('src/js/RADIX_SUBTHEME_MACHINE_NAME.script.js', 'js');
+mix.js('js/DORION_SUBTHEME_MACHINE_NAME.script.js', 'js');

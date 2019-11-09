@@ -1,0 +1,5 @@
+# Schema for the configuration files of the DORION_SUBTHEME_NAME theme.
+
+DORION_SUBTHEME_MACHINE_NAME.settings:
+  type: theme_settings
+  label: 'DORION_SUBTHEME_NAME settings'

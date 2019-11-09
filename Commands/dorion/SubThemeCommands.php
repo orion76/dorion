@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Drush\Commands\radix;
+namespace Drush\Commands\dorion;
 
 use Consolidation\AnnotatedCommand\CommandData;
 use Consolidation\AnnotatedCommand\CommandError;
 use Drupal\Component\Utility\UrlHelper;
-use Drupal\radix\SubThemeGenerator;
+use Drupal\dorion\SubThemeGenerator;
 use Drush\Commands\DrushCommands;
 use Exception;
 use FilesystemIterator;
@@ -27,7 +27,7 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
   use FilesystemTaskLoader;
 
   /**
-   * @var \Drupal\radix\SubThemeGenerator
+   * @var \Drupal\dorion\SubThemeGenerator
    */
   protected $subThemeCreator;
 
@@ -47,10 +47,10 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
   }
 
   /**
-   * Creates a Radix sub-theme.
+   * Creates a Dorion sub-theme.
    *
-   * @command radix:create
-   * @aliases radix
+   * @command dorion:create
+   * @aliases dorion
    *
    * @bootstrap full
    *
@@ -64,13 +64,13 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
    * @option string $kit
    *   The name or url of the starter kit to use.
    *
-   * @usage drush radix:create 'My Theme'
-   *   Creates a Radix sub-theme called "My Theme", using the default options.
-   * @usage drush radix:create 'My Theme' --machine_name=my_theme
-   *   Creates a Radix sub-theme called "My Theme" with a specific machine name.
+   * @usage drush dorion:create 'My Theme'
+   *   Creates a Dorion sub-theme called "My Theme", using the default options.
+   * @usage drush dorion:create 'My Theme' --machine_name=my_theme
+   *   Creates a Dorion sub-theme called "My Theme" with a specific machine name.
    *
-   * @radixArgLabel name
-   * @radixOptionMachineName machine-name
+   * @dorionArgLabel name
+   * @dorionOptionMachineName machine-name
    */
   public function generateSubTheme(
     string $name,
@@ -84,13 +84,13 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
     $kit = $options['kit'];
 
     // @todo Use extension service.
-    $radixDir = drupal_get_path('theme', 'radix');
-    $srcDir = "$radixDir/src/kits/{$kit}";
+    $dorionDir = drupal_get_path('theme', 'dorion');
+    $srcDir = "$dorionDir/kits/{$kit}";
 
     // Find kit from other active themes.
     /** @var \Drupal\Core\Extension\Extension[] $themes */
     foreach (\Drupal::service('theme_handler')->listInfo() as $theme) {
-      $path = "{$theme->getPath()}/src/kits/{$kit}";
+      $path = "{$theme->getPath()}/kits/{$kit}";
       if($this->fs->exists($path)) {
         $srcDir = $path;
       }
@@ -108,7 +108,7 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
       $cb->addCode(function (RoboStateData $data) use ($kitUrl): int {
         $logger = $this->logger();
         $logger->debug(
-          'download Radix starter kit from <info>{kitUrl}</info>',
+          'download Dorion starter kit from <info>{kitUrl}</info>',
           [
             'kitUrl' => $kitUrl,
           ]
@@ -134,7 +134,7 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
       $cb->addCode(function (RoboStateData $data): int {
         $logger = $this->logger();
         $logger->debug(
-          'extract downloaded Radix starter kit from <info>{packPath}</info> to <info>{srcDir}</info>',
+          'extract downloaded Dorion starter kit from <info>{packPath}</info> to <info>{srcDir}</info>',
           [
             'packPath' => $data['packPath'],
             'srcDir' => $data['srcDir'],
@@ -169,7 +169,7 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
     $cb->addCode(function (RoboStateData $data) use ($dstDir): int {
       $logger = $this->logger();
       $logger->debug(
-        'copy Radix starter kit from <info>{srcDir}</info> to <info>{dstDir}</info>',
+        'copy Dorion starter kit from <info>{srcDir}</info> to <info>{dstDir}</info>',
         [
           'srcDir' => $data['srcDir'],
           'dstDir' => $dstDir,
@@ -191,7 +191,7 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
     $cb->addCode(function () use ($name, $options, $dstDir): int {
       $logger = $this->logger();
       $logger->debug(
-        'customize Radix starter kit in <info>{dstDir}</info> directory',
+        'customize Dorion starter kit in <info>{dstDir}</info> directory',
         [
           'dstDir' => $dstDir,
         ]
@@ -212,9 +212,9 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
   }
 
   /**
-   * @hook validate radix:create
+   * @hook validate dorion:create
    */
-  public function onHookValidateRadixGenerateSubTheme(CommandData $commandData): ?CommandError {
+  public function onHookValidateDorionGenerateSubTheme(CommandData $commandData): ?CommandError {
     $input = $commandData->input();
 
 
@@ -247,12 +247,12 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
   }
 
   /**
-   * @hook validate @radixArgLabel
+   * @hook validate @dorionArgLabel
    *
    * @return null|\Consolidation\AnnotatedCommand\CommandError
    */
-  public function onHookValidateRadixArgLabel(CommandData $commandData): ?CommandError {
-    $annotationKey = 'radixArgLabel';
+  public function onHookValidateDorionArgLabel(CommandData $commandData): ?CommandError {
+    $annotationKey = 'dorionArgLabel';
     $annotationData = $commandData->annotationData();
     if (!$annotationData->has($annotationKey)) {
       return NULL;
@@ -261,13 +261,13 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
     $commandErrors = [];
     $argNames = $this->parseMultiValueAnnotation($annotationData->get($annotationKey));
     foreach ($argNames as $argName) {
-      $commandErrors[] = $this->onHookValidateRadixArgLabelSingle($commandData, $argName);
+      $commandErrors[] = $this->onHookValidateDorionArgLabelSingle($commandData, $argName);
     }
 
     return $this->aggregateCommandErrors($commandErrors);
   }
 
-  protected function onHookValidateRadixArgLabelSingle(CommandData $commandData,  string $argName): ?CommandError {
+  protected function onHookValidateDorionArgLabelSingle(CommandData $commandData,  string $argName): ?CommandError {
     $label = $commandData->input()->getArgument($argName);
     if (strlen($label) === 0) {
       return NULL;
@@ -281,10 +281,10 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
   }
 
   /**
-   * @hook validate @radixOptionMachineName
+   * @hook validate @dorionOptionMachineName
    */
-  public function onHookValidateRadixOptionMachineName(CommandData $commandData) {
-    $annotationKey = 'radixOptionMachineName';
+  public function onHookValidateDorionOptionMachineName(CommandData $commandData) {
+    $annotationKey = 'dorionOptionMachineName';
     $annotationData = $commandData->annotationData();
     if (!$annotationData->has($annotationKey)) {
       return NULL;
@@ -293,13 +293,13 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
     $commandErrors = [];
     $optionNames = $this->parseMultiValueAnnotation($annotationData->get($annotationKey));
     foreach ($optionNames as $optionName) {
-      $commandErrors[] = $this->onHookValidateRadixOptionMachineNameSingle($commandData, $optionName);
+      $commandErrors[] = $this->onHookValidateDorionOptionMachineNameSingle($commandData, $optionName);
     }
 
     return $this->aggregateCommandErrors($commandErrors);
   }
 
-  protected function onHookValidateRadixOptionMachineNameSingle(CommandData $commandData, $optionName): ?CommandError {
+  protected function onHookValidateDorionOptionMachineNameSingle(CommandData $commandData, $optionName): ?CommandError {
     $machineNames = $commandData->input()->getOption($optionName);
     if (!is_array($machineNames)) {
       $machineNames = strlen($machineNames) !== 0 ? [$machineNames] : [];
@@ -362,7 +362,7 @@ class SubThemeCommands extends DrushCommands implements BuilderAwareInterface {
   }
 
   protected function getDefaultDescription(): string {
-    return 'A theme based on Radix.';
+    return 'A theme based on Dorion.';
   }
 
   protected function isDirEmpty(string $dir): bool {

@@ -1,15 +1,15 @@
-# Radix
-[![Documentation Status](https://readthedocs.org/projects/radix/badge/?version=latest)](http://docs.radixtheme.org/en/latest/?badge=latest)
+# Dorion
+[![Documentation Status](https://readthedocs.org/projects/dorion/badge/?version=latest)](http://docs.doriontheme.org/en/latest/?badge=latest)
 
-Radix is a base theme for Drupal. It has Bootstrap 4, Sass, BrowserSync and Font Awesome built-in.
+Dorion is a base theme for Drupal. It has Bootstrap 4, Sass, BrowserSync and Font Awesome built-in.
 
-![alt tag](https://www.drupal.org/files/radix-steps.png)
+![alt tag](https://www.drupal.org/files/dorion-steps.png)
 
 # Installation
 
-Read the documentation here: http://docs.radixtheme.org
+Read the documentation here: http://docs.doriontheme.org
 
-## Distributions using Radix
+## Distributions using Dorion
 ##### [Apigee Developer Portal](https://www.drupal.org/project/apigee_devportal_kickstart)
 Apigee Developer Kickstart is a distribution to create an Apigee developer portal using Drupal.
 
@@ -32,9 +32,9 @@ DKAN is a community-driven, free and open source open data platform that gives o
 SiteNow provides flexibility in authoring websites for various audiences.
 
 ## Links
-* Project Page:   http://www.radixtheme.org
-* Documentation:  http://docs.radixtheme.org
-* Support:        https://www.drupal.org/project/issues/radix
+* Project Page:   http://www.doriontheme.org
+* Documentation:  http://docs.doriontheme.org
+* Support:        https://www.drupal.org/project/issues/dorion
 
 ## License
 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html

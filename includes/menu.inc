@@ -7,12 +7,12 @@
 /**
  * Implements hook_preprocess_menu().
  */
-function radix_preprocess_menu(&$variables, $hook) {
+function dorion_preprocess_menu(&$variables, $hook) {
   // No changes for menu toolbar.
   if ($hook == 'menu__toolbar') {
     return;
   }
-  
+
   // Get the current path.
   $current_path = \Drupal::request()->getRequestUri();
 
@@ -33,7 +33,7 @@ function radix_preprocess_menu(&$variables, $hook) {
 /**
  * Implements template_preprocess_menu_local_action().
  */
-function radix_preprocess_menu_local_action(&$variables) {
+function dorion_preprocess_menu_local_action(&$variables) {
   // Add button classes.
   $variables['link']['#options']['attributes']['class'][] = 'btn';
   $variables['link']['#options']['attributes']['class'][] = 'btn-sm';
@@ -43,7 +43,7 @@ function radix_preprocess_menu_local_action(&$variables) {
 /**
  * Implements template_preprocess_links__dropbutton().
  */
-function radix_preprocess_links__dropbutton(&$variables) {
+function dorion_preprocess_links__dropbutton(&$variables) {
   $links = &$variables['links'];
 
   // Do nothing if we have no links.

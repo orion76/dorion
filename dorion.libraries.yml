@@ -5,7 +5,7 @@ bootstrap:
     node_modules/bootstrap/dist/js/bootstrap.min.js: {}
   css:
     theme:
-      assets/css/radix.bootstrap.css: {}
+      assets/css/dorion.bootstrap.css: {}
   dependencies:
     - core/jquery
 
@@ -13,7 +13,7 @@ style:
   version: VERSION
   css:
     theme:
-      assets/css/radix.style.css: {}
+      assets/css/dorion.style.css: {}
   dependencies:
     - core/jquery
     - core/drupal

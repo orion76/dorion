@@ -9,11 +9,11 @@ use Drupal\Component\Utility\UrlHelper;
 /**
  * Implements hook_drush_command().
  */
-function radix_drush_command() {
+function dorion_drush_command() {
   $items = array();
 
-  $items['radix'] = array(
-    'description' => 'Create a Radix subtheme.',
+  $items['dorion'] = array(
+    'description' => 'Create a Dorion subtheme.',
     'arguments' => array(
       'name'         => 'The name of your subtheme.',
     ),
@@ -24,8 +24,8 @@ function radix_drush_command() {
       'kit' => 'The name or url of the starter kit to use. Defaults to "default".',
     ),
     'examples' => array(
-      'drush radix "My Theme"' => 'Creates a Radix subtheme called "My Theme", using the default options.',
-      'drush radix "My Theme" --machine_name=my_theme' => 'Creates a Radix subtheme called "My Theme" with a specific machine name.',
+      'drush dorion "My Theme"' => 'Creates a Dorion subtheme called "My Theme", using the default options.',
+      'drush dorion "My Theme" --machine_name=my_theme' => 'Creates a Dorion subtheme called "My Theme" with a specific machine name.',
     ),
   );
 
@@ -35,10 +35,10 @@ function radix_drush_command() {
 /**
  * Implements hook_drush_help().
  */
-function radix_drush_help($section) {
+function dorion_drush_help($section) {
   switch ($section) {
-    case 'drush:radix':
-      return dt('This command will create a Radix subtheme. See examples to get started.');
+    case 'drush:dorion':
+      return dt('This command will create a Dorion subtheme. See examples to get started.');
     break;
   }
 }
@@ -46,11 +46,11 @@ function radix_drush_help($section) {
 /**
  * Implements drush_hook_COMMAND().
  */
-function drush_radix($name = NULL, $machine_name = NULL) {
+function drush_dorion($name = NULL, $machine_name = NULL) {
 
   // If no $name provided, abort.
   if (!$name) {
-    drush_print(dt('Theme name missing. See help using drush radix --help.'));
+    drush_print(dt('Theme name missing. See help using drush dorion --help.'));
     return;
   }
 
@@ -74,7 +74,7 @@ function drush_radix($name = NULL, $machine_name = NULL) {
   $machine_name = preg_replace($search, '', $machine_name);
 
   // Description of subtheme.
-  $description = (drush_get_option('description')) ? trim(drush_get_option('description')) : 'A theme based on Radix.';
+  $description = (drush_get_option('description')) ? trim(drush_get_option('description')) : 'A theme based on Dorion.';
 
   // Determine the path to the new subtheme.
   $subtheme_path = 'themes';
@@ -87,7 +87,7 @@ function drush_radix($name = NULL, $machine_name = NULL) {
   $kit = (drush_get_option('kit')) ? drush_trim_path(drush_get_option('kit')) : 'default';
 
   // Make a fresh copy of the kit.
-  $kit_path = drush_normalize_path(drush_get_context('DRUSH_DRUPAL_ROOT') . '/' . drupal_get_path('theme', 'radix') . '/src/kits/' . $kit);
+  $kit_path = drush_normalize_path(drush_get_context('DRUSH_DRUPAL_ROOT') . '/' . drupal_get_path('theme', 'dorion') . '/kits/' . $kit);
 
   // Allow kits to be pulled from external urls.
   if (UrlHelper::isValid($kit, TRUE)) {
@@ -95,7 +95,7 @@ function drush_radix($name = NULL, $machine_name = NULL) {
     $kit_name = 'kit';
 
     // Get kit name from kit url.
-    if (preg_match("/\/radix\-kit\-([a-z0-9\_]*)\//", $kit_url, $matches)) {
+    if (preg_match("/\/dorion\-kit\-([a-z0-9\_]*)\//", $kit_url, $matches)) {
       $kit_name = $kit = $matches[1];
     }
 
@@ -130,16 +130,16 @@ function drush_radix($name = NULL, $machine_name = NULL) {
 
   // Alter the contents of the .info file based on the command options.
   $alterations = array(
-    'RADIX_SUBTHEME_NAME' => $name,
-    'RADIX_SUBTHEME_DESCRIPTION' => $description,
-    'RADIX_SUBTHEME_MACHINE_NAME' => $machine_name,
+    'DORION_SUBTHEME_NAME' => $name,
+    'DORION_SUBTHEME_DESCRIPTION' => $description,
+    'DORION_SUBTHEME_MACHINE_NAME' => $machine_name,
     'hidden: true' => '',
   );
 
   // Replace all occurrences of '{{machine_name}}' with the machine name of our sub theme.
-  $files_to_replace = radix_get_files_to_make_replacements($kit);
+  $files_to_replace = dorion_get_files_to_make_replacements($kit);
   foreach ($files_to_replace as $file_to_replace) {
-    drush_op('radix_file_str_replace', $subtheme_path . '/' . $file_to_replace, array_keys($alterations), $alterations);
+    drush_op('dorion_file_str_replace', $subtheme_path . '/' . $file_to_replace, array_keys($alterations), $alterations);
   }
 
   // Rename files.
@@ -149,8 +149,8 @@ function drush_radix($name = NULL, $machine_name = NULL) {
     '{{kit}}.breakpoints.yml',
     '{{kit}}.theme',
     'config/schema/{{kit}}.schema.yml',
-    'src/sass/{{kit}}.style.scss',
-    'src/js/{{kit}}.script.js',
+    'sass/{{kit}}.style.scss',
+    'js/{{kit}}.script.js',
   );
   foreach ($files_to_rename as $file_to_rename_path) {
     $file_original_path = $subtheme_path . '/' . str_replace('{{kit}}', $kit, $file_to_rename_path);
@@ -159,7 +159,7 @@ function drush_radix($name = NULL, $machine_name = NULL) {
   }
 
   // Notify user of the newly created theme.
-  $message = 'Successfully created the Radix subtheme "!name" in "!path" using the "!kit" kit';
+  $message = 'Successfully created the Dorion subtheme "!name" in "!path" using the "!kit" kit';
 
   $message = dt($message . '.', array(
     '!name' => $name,
@@ -172,7 +172,7 @@ function drush_radix($name = NULL, $machine_name = NULL) {
 /**
  * Replace strings in a file.
  */
-function radix_file_str_replace($file_path, $find, $replace) {
+function dorion_file_str_replace($file_path, $find, $replace) {
   $file_path = drush_normalize_path($file_path);
   $file_contents = file_get_contents($file_path);
   $file_contents = str_replace($find, $replace, $file_contents);
@@ -182,7 +182,7 @@ function radix_file_str_replace($file_path, $find, $replace) {
 /**
  * Returns an array of files to make string replacements.
  */
-function radix_get_files_to_make_replacements($kit = 'default') {
+function dorion_get_files_to_make_replacements($kit = 'default') {
   return array(
     $kit . '.info.yml',
     $kit . '.libraries.yml',

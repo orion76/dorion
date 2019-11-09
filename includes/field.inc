@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_field().
  */
-function radix_preprocess_field(&$variables) {
+function dorion_preprocess_field(&$variables) {
   $element = $variables['element'];
   $field_name = $element['#field_name'];
   $bundle = $element['#bundle'];
@@ -24,7 +24,7 @@ function radix_preprocess_field(&$variables) {
 /**
  * Implements template_preprocess_filter_caption().
  */
-function radix_preprocess_filter_caption(&$variables) {
+function dorion_preprocess_filter_caption(&$variables) {
   // Do this for img tags only.
   if (($variables['tag'] !== 'img')) {
     return;

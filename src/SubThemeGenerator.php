@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\radix;
+namespace Drupal\dorion;
 
 use RuntimeException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -36,7 +36,7 @@ class SubThemeGenerator {
 
   /**
    * @param string $dir
-   *   Directory where a Radix starter kit already copied to.
+   *   Directory where a Dorion starter kit already copied to.
    *
    * @return $this
    */
@@ -179,9 +179,9 @@ class SubThemeGenerator {
    */
   protected function getFileContentReplacementPairs(): array {
     return [
-      'RADIX_SUBTHEME_NAME' => $this->getName(),
-      'RADIX_SUBTHEME_DESCRIPTION' => $this->getDescription(),
-      'RADIX_SUBTHEME_MACHINE_NAME' => $this->getMachineName(),
+      'DORION_SUBTHEME_NAME' => $this->getName(),
+      'DORION_SUBTHEME_DESCRIPTION' => $this->getDescription(),
+      'DORION_SUBTHEME_MACHINE_NAME' => $this->getMachineName(),
       "\nhidden: true\n" => "\n",
     ];
   }

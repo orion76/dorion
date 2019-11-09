@@ -36,5 +36,5 @@ mix.browserSync({
  |--------------------------------------------------------------------------
  */
 mix
-  .sass('src/sass/radix.bootstrap.scss', 'css')
-  .sass('src/sass/radix.style.scss', 'css');
+  .sass('sass/dorion.bootstrap.scss', 'css')
+  .sass('sass/dorion.style.scss', 'css');

@@ -4,12 +4,12 @@
  * Template for the branding block.
  */
 #}
-{% embed '@radix/block/block.twig' with {
+{% embed '@dorion/block/block.twig' with {
   html_tag: 'div',
 } %}
 
 {% block content %}
-  {% include '@radix/navbar/navbar-brand.twig' with {
+  {% include '@dorion/navbar/navbar-brand.twig' with {
     text: site_name,
     image: site_logo,
     width: 30,

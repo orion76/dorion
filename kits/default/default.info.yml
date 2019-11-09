@@ -1,11 +1,11 @@
-name: RADIX_SUBTHEME_NAME
-description: RADIX_SUBTHEME_DESCRIPTION
+name: DORION_SUBTHEME_NAME
+description: DORION_SUBTHEME_DESCRIPTION
 screenshot: screenshot.png
 core: 8.x
 # version: VERSION
 engine: twig
 type: theme
-base theme: radix
+base theme: dorion
 hidden: true
 
 regions:
@@ -18,21 +18,21 @@ regions:
   footer: Footer
 
 libraries:
-  - radix/style
-  - RADIX_SUBTHEME_MACHINE_NAME/style
+  - dorion/style
+  - DORION_SUBTHEME_MACHINE_NAME/style
 
 libraries-override:
-  radix/bootstrap: false
+  dorion/bootstrap: false
 
 ckeditor_stylesheets:
-  - assets/css/RADIX_SUBTHEME_MACHINE_NAME.style.css
+  - assets/css/DORION_SUBTHEME_MACHINE_NAME.style.css
 
 component-libraries:
-  RADIX_SUBTHEME_MACHINE_NAME:
+  DORION_SUBTHEME_MACHINE_NAME:
     paths:
-      - ./src/components
+      - ./components
 
 # Information added by Drupal.org packaging script on 2019-10-07
 version: '8.x-4.6'
-project: 'radix'
+project: 'dorion'
 datestamp: 1570446487

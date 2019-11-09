@@ -14,4 +14,4 @@
   {% set css_classes = ['form-control'] %}
 {% endif %}
 
-<input{{ attributes.addClass(css_classes).removeClass('form-text') }} />{{ children }}
+<input{{ attributes.addClass(css_classes) }} />{{ children }}

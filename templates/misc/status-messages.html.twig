@@ -13,7 +13,7 @@
 
 {% for type, messages in message_list %}
   <div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes|without('role', 'aria-label') }}>
-    {% embed '@radix/alert/alert.twig' with {
+    {% embed '@dorion/alert/alert.twig' with {
       type: types[type],
     } %}
       {% block content %}

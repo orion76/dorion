@@ -34,8 +34,8 @@
       </caption>
     {% endif %}
     {% if header %}
-      <thead class="bg-light">
-      <tr>
+      <thead class="table__head">
+      <tr class="table__row">
         {% for key, column in header %}
           {% if column.default_classes %}
             {% set column_classes = [
