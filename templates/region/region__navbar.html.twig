@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Template for a region.
+ */
+#}
+{% if content %}
+
+  {% embed '@dorion/navbar/navbar.twig' with {
+    placement: content.placement,
+    collapsible: content.collapsible,
+    collapse_class: content.collapse_class,
+    utility_classes: [],
+  } %}
+
+    {% block navbar %}
+
+        {{ content }}
+
+    {% endblock %}
+
+  {% endembed %}
+
+  {{ content }}
+{% endif %}

@@ -18,21 +18,25 @@
 {% set utility_classes = utility_classes|join(' ') %}
 
 {% if path %}
-  <a href="{{ path }}" class="navbar-brand d-flex align-items-center {{ utility_classes }}" aria-label="{{ text }}">
+  <a href="{{ path }}" class="navbar-brand {{ utility_classes }}" aria-label="{{ text }}">
     {% if image %}
       {{ navbar_brand.image(image, width, height, alt) }}
     {% endif %}
-    {{ text }}
+    {{ navbar_brand.site_name(text) }}
   </a>
 {% else %}
-  <span class="navbar-brand h1 mb-0 {{ utility_classes }}" aria-label="{{ text }}">
+  <span class="navbar-brand {{ utility_classes }}" aria-label="{{ text }}">
     {% if image %}
       {{ navbar_brand.image(image, alt) }}
     {% endif %}
-    {{ text }}
+    {{ navbar_brand.site_name(text) }}
   </span>
 {% endif %}
 
 {% macro image(src, width, height, alt) %}
-  <img src="{{ src }}" width="{{ width|default(30) }}" height="{{ height|default('auto') }}" alt="{{ alt|default('') }}" class="mr-2" />
+  <img src="{{ src }}" width="{{ width|default(30) }}" height="{{ height|default('auto') }}" alt="{{ alt|default('') }}" />
+{% endmacro %}
+
+{% macro site_name(text) %}
+  <span class="site-name">{{ text }}</span>
 {% endmacro %}

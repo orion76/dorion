@@ -5,12 +5,20 @@
  * Theme and preprocess functions for fields.
  */
 
+use Drupal\Component\Utility\Html;
+
 /**
  * Implements hook_preprocess_field().
  */
 function dorion_preprocess_field(&$variables) {
   $element = $variables['element'];
   $field_name = $element['#field_name'];
+  $field_type = $variables['element']['#field_type'];
+
+  $variables['attributes']['class'][] = 'field';
+  $variables['attributes']['class'][] = Html::cleanCssIdentifier('field-type--' . $field_type);
+
+
   $bundle = $element['#bundle'];
 
   // Add bundle to template.
@@ -31,7 +39,7 @@ function dorion_preprocess_filter_caption(&$variables) {
   }
 
   // Add the figure-img class to the rendered image markup.
-  libxml_use_internal_errors(true);
+  libxml_use_internal_errors(TRUE);
   $doc = new DOMDocument();
   $doc->loadHTML($variables['node']);
   if ($image = $doc->getElementsByTagName('img')->item(0)) {

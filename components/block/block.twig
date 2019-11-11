@@ -10,8 +10,7 @@
 #}
 {% set classes = [
   'block',
-  bundle ? 'block--' ~ bundle|clean_class,
-  id ? 'block--' ~ id|replace({"_": "-"})|clean_class,
+  bundle ? 'block__' ~ bundle,
 ]|merge(utility_classes ? utility_classes : []) %}
 
 {% if html_tag %}

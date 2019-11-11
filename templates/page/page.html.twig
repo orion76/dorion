@@ -5,54 +5,37 @@
  */
 #}
 <div class="page">
-  {% embed '@dorion/navbar/navbar.twig' with {
-    placement: 'sticky-top',
-    container: 'fixed',
-    utility_classes: [],
-  } %}
 
-    {% block branding %}
-      {% if page.navbar_branding %}
-        {{ page.navbar_branding }}
-      {% endif %}
-    {% endblock %}
+  {% if page.navbar_first %}
+    {{ page.navbar_first }}
+  {% endif %}
 
-    {% block left %}
-      {% if page.navbar_left %}
-           {{ page.navbar_left }}
-        {% endif %}
-    {% endblock %}
+  {% if page.navbar_second %}
+    {{ page.navbar_second }}
+  {% endif %}
 
-    {% block right %}
-      {% if page.navbar_right %}
-        {{ page.navbar_right }}
-      {% endif %}
-    {% endblock %}
-  {% endembed %}
+  {% if page.navbar_third %}
+    {{ page.navbar_third }}
+  {% endif %}
+
 
   <main class="page__main">
     {% if page.header %}
       <header class="page__header">
-        <div class="container">
-          {{ page.header }}
-        </div>
+        {{ page.header }}
       </header>
     {% endif %}
 
     {% if page.content %}
       <div class="page__content">
-        <div class="container">
-          {{ page.content }}
-        </div>
+        {{ page.content }}
       </div>
     {% endif %}
   </main>
 
   {% if page.footer %}
     <footer class="page__footer">
-      <div class="container">
-          {{ page.footer }}
-        </div>
+      {{ page.footer }}
     </footer>
   {% endif %}
 </div>

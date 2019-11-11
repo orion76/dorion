@@ -1,8 +1,44 @@
 <?php
+require_once dirname(__FILE__) . '/src/ThemeSettings.php';
 /**
  * @file
  * Theme hooks for Dorion.
  */
+
+function _dorion_is_entity_view(&$variables) {
+  static $types;
+  if (empty($types)) {
+    $types = [
+      'node' => TRUE,
+      'user' => TRUE,
+      'taxonomy_term' => TRUE,
+      'paragraph' => TRUE,
+    ];
+  }
+  return isset($variables['theme_hook_original']) && isset($types[$variables['theme_hook_original']]);
+}
+
+function _dorion_is_config_entity_view(&$variables) {
+  static $types;
+  if (empty($types)) {
+    $types = [
+      'block' => TRUE,
+    ];
+  }
+  return isset($variables['theme_hook_original']) && isset($types[$variables['theme_hook_original']]);
+}
+
+
+function dorion_preprocess(&$variables) {
+  $n = 0;
+  if (_dorion_is_entity_view($variables)) {
+    $variables['attributes']['class'][] = 'content-entity-view';
+  }
+
+  if (_dorion_is_config_entity_view($variables)) {
+    $variables['attributes']['class'][] = 'config-entity-view';
+  }
+}
 
 // Include all files from the includes directory.
 $includes_path = dirname(__FILE__) . '/includes/*.inc';

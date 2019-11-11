@@ -5,6 +5,7 @@
  * Theme and preprocess functions for block.
  */
 
+use Drupal\block\Entity\Block;
 use Drupal\Core\Render\Element;
 
 /**
@@ -31,8 +32,14 @@ function dorion_preprocess_block(&$variables) {
   // Add id to template.
   if (isset($variables['elements']['#id'])) {
     $variables['id'] = str_replace('_', '-', $variables['elements']['#id']);
-  }
 
+    $block = Block::load($variables['elements']['#id']);
+    $name = str_replace($block->getTheme() . "_", "", $block->id());
+    $variables['attributes']['class'][] = 'block__' . $name;
+  }
+  if (isset($variables['id'])) {
+    $n = 0;
+  }
   // Check for BlockContent.
   if ($variables['elements']['#configuration']['provider'] != 'block_content' || empty($variables['elements']['content']['#block_content'])) {
     return;
@@ -50,7 +57,7 @@ function dorion_preprocess_block(&$variables) {
  */
 function dorion_preprocess_block_content(&$variables) {
   // Helpful $content variable for templates.
-  $variables += array('content' => array());
+  $variables += ['content' => []];
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }

@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Template for the main page.
+ */
+#}
+<div class="page">
+
+  {% if page.navbar_first %}
+    {% embed '@dorion/navbar/navbar.twig' with {
+      placement: page.navbar_first.placement,
+      collapsible: page.navbar_first.collapsible,
+      collapse_class: page.navbar_first.collapse_class,
+      utility_classes: [],
+    } %}
+
+      {% block navbar %}
+        {% if page.navbar_first %}
+          {{ page.navbar_first }}
+        {% endif %}
+      {% endblock %}
+
+    {% endembed %}
+  {% endif %}
+
+  {% if page.navbar_second %}
+    {% embed '@dorion/navbar/navbar.twig' with {
+      placement: page.navbar_second.placement,
+      collapsible: page.navbar_second.collapsible,
+      collapse_class: page.navbar_second.collapse_class,
+      utility_classes: [],
+    } %}
+
+      {% block navbar %}
+        {% if page.navbar_second %}
+          {{ page.navbar_second }}
+        {% endif %}
+      {% endblock %}
+
+    {% endembed %}
+  {% endif %}
+
+  {% if page.navbar_third %}
+    {% embed '@dorion/navbar/navbar.twig' with {
+      placement: page.navbar_third.placement,
+      collapsible: page.navbar_third.collapsible,
+      collapse_class: page.navbar_third.collapse_class,
+      utility_classes: [],
+    } %}
+
+      {% block navbar %}
+        {% if page.navbar_third %}
+          {{ page.navbar_third }}
+        {% endif %}
+      {% endblock %}
+
+    {% endembed %}
+  {% endif %}
+
+
+  <main class="page__main">
+    {% if page.header %}
+      <header class="page__header">
+        {{ page.header }}
+      </header>
+    {% endif %}
+
+    {% if page.content %}
+      <div class="page__content">
+        {{ page.content }}
+      </div>
+    {% endif %}
+  </main>
+
+  {% if page.footer %}
+    <footer class="page__footer">
+      {{ page.footer }}
+    </footer>
+  {% endif %}
+</div>

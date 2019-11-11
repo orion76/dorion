@@ -17,33 +17,21 @@
 #}
 {{ attach_library('dorion/navbar') }}
 
-{% set container = container == 'fixed' ? 'container' : false %}
 {% set placement = placement ?? '' %}
+{% set collapsible = collapsible ?? '' %}
+{% set collapse_class = collapse_class ?? '' %}
 
 <nav class="navbar {{ placement }} {{ utility_classes|join(' ') }}">
-  {% if container %}
-    <div class="{{ container }}">
-  {% endif %}
 
-  {% block branding %}
-    {{ branding }}
-  {% endblock %}
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+  {% if collapsible %}
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".{{ collapse_class }}" aria-controls="{{ collapse_class }}" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  {% endif %}
 
-  <div class="collapse navbar-collapse">
-    {% block left %}
-      {{ left }}
-    {% endblock %}
-
-    {% block right %}
-      {{ right }}
+  <div class="collapse {{ collapse_class }}">
+    {% block navbar %}
+      {{ navbar }}
     {% endblock %}
   </div>
-
-  {% if container %}
-    </div>
-  {% endif %}
 </nav>
