@@ -17,6 +17,7 @@ function dorion_theme_suggestions_form_alter(array &$suggestions, array &$variab
     $suggestions[] = $variables['theme_hook_original'] . '__' . $element['#form_id'];
   }
 }
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
@@ -33,10 +34,29 @@ function dorion_theme_suggestions_form_element_alter(array &$suggestions, array 
  * Implements hook_preprocess_input().
  */
 function dorion_preprocess_input(&$variables) {
-  $element = $variables['element'];
+  $element = &$variables['element'];
 
   // Add the element type to the theme.
   $variables['type'] = $element['#type'];
+  if (isset($element['#description'])) {
+
+    $variables['attributes'] += [
+      'data-toggle' => 'popover',
+      'data-placement' => 'right',
+      'data-content' => $element['#description']->render(),
+      'data-trigger' => 'hover',
+    ];
+    unset($element['#description']);
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_form_element().
+ */
+function dorion_preprocess_form(&$variables) {
+  array_unshift($variables['attributes']['class'], 'form');
+  $element = $variables['element'];
 }
 
 /**
@@ -44,6 +64,10 @@ function dorion_preprocess_input(&$variables) {
  */
 function dorion_preprocess_form_element(&$variables) {
   $element = $variables['element'];
+
+  if (isset($variables['description'])) {
+    unset($variables['description']);
+  }
 
   // Add required class for checkbox and radio labels.
   if (in_array($element['#type'], ['checkbox', 'radio'])) {

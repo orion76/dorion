@@ -10,7 +10,7 @@
     <div class="col-md-8">
       {% if display_submitted %}
         <footer>
-          <div{{ author_attributes.addClass('mb-4', 'lead') }}>
+          <div{{ author_attributes }}>
             {% trans %}Posted by {{ author_name }} on {{ date }}{% endtrans %}
             {{ metadata }}
           </div>
@@ -18,7 +18,7 @@
       {% endif %}
 
       {% if content.taxonomy_forums %}
-        <div class="mb-4">
+        <div class="">
           {{ content.taxonomy_forums }}
         </div>
       {% endif %}

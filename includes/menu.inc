@@ -43,7 +43,7 @@ function dorion_preprocess_menu_local_action(&$variables) {
 /**
  * Implements template_preprocess_links__dropbutton().
  */
-function dorion_preprocess_links__dropbutton(&$variables) {
+function __dorion_preprocess_links__dropbutton(&$variables) {
   $links = &$variables['links'];
 
   // Do nothing if we have no links.

@@ -9,6 +9,14 @@ bootstrap:
   dependencies:
     - core/jquery
 
+popover:
+  version: VERSION
+  js:
+    js/popover.js: {}
+  dependencies:
+    - core/jquery
+
+
 style:
   version: VERSION
   css:

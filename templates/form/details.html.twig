@@ -6,14 +6,12 @@
 #}
 {% set css_classes = [
   'card',
-  'mb-3',
 ] %}
 
 <details{{ attributes.addClass(css_classes) }}>
   {%
     set summary_classes = [
       'card-header',
-      required ? 'js-form-required',
       required ? 'form-required',
     ]
   %}
